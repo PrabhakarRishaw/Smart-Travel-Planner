@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Travel Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Travel Planner</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="fadeIn">
+    <nav>
+      <div class="logo">Smart Travel Planner</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#search">Search</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="slideUp">
+    <div class="hero-content">
+      <h1 class="fadeInUp">Your Personalized Travel Companion</h1>
+      <br><br><p>Discover top destinations, get real-time weather updates, and plan your perfect trip.</p>
+      <br><br><br><a href="#search" class="cta-button">Start Planning</a>
+    </div>
+  </section>
+
+  <section id="search" class="section fadeIn">
+    <h2 class="fadeInUp">Find Your Next Adventure</h2>
+    <input type="text" id="cityInput" placeholder="Enter City" />
+    <button onclick="searchCity()">Search</button>
+    <div id="loadingSpinner" style="display:none;">Loading...</div>
+    <div id="results">
+      <div id="weather"></div>
+      <div id="attractions"></div>
+    </div>
+  </section>
+
+  <section id="destinations" class="section fadeInUp">
+    <h2 class="fadeInUp">Featured Destinations</h2>
+    <div class="destinations fadeInUp">
+      <div class="destination-card" style="background-image: url(image1.jpg);">
+        <h3>Paris</h3>
+        <p>The city of love. Explore iconic landmarks and fine dining.</p>
+      </div>
+      <div class="destination-card" style="background-image: url('image2.jpg');">
+        <h3>New York</h3>
+        <p>The city that never sleeps. Experience Broadway and Times Square.</p>
+      </div>
+      <div class="destination-card" style="background-image: url('image3.jpg');">
+        <h3>Tokyo</h3>
+        <p>A bustling metropolis. Discover the blend of tradition and technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section fadeIn">
+    <h2 class="fadeInUp">Contact Us</h2>
+    <form action="#" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="cta-button">Send Message</button>
+    </form>
+  </section>
+
+  <footer class="fadeIn">
+    <p>&copysr; 2025 Smart Travel Planner. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

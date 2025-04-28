@@ -1,0 +1,66 @@
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config(); // Loads environment variables
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.use(cors());
+
+app.get('/weather', async (req, res) => {
+    const city = req.query.city;
+    const apiKey = process.env.OPENWEATHERMAP_API_KEY; // Use your OpenWeatherMap API key
+
+    if (!city) {
+        return res.status(400).send('City is required');
+    }
+
+    try {
+        const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const weatherData = weatherResponse.data;
+        res.json({
+            name: weatherData.name,
+            temperature: weatherData.main.temp,
+            description: weatherData.weather[0].description,
+            icon: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching weather data');
+    }
+});
+
+app.get('/attractions', async (req, res) => {
+    const city = req.query.city;
+    const apiKey = process.env.FOURSQUARE_API_KEY; // Use your Foursquare API key
+
+    if (!city) {
+        return res.status(400).send('City is required');
+    }
+
+    try {
+        const attractionsResponse = await axios.get(`https://api.foursquare.com/v3/places/search?near=${city}&limit=5`, {
+            headers: {
+                Authorization: apiKey
+            }
+        });
+        const attractionsData = attractionsResponse.data.results;
+        const attractions = attractionsData.map(place => ({
+            name: place.name,
+            location: place.location.address || 'No address available',
+            category: place.categories[0]?.name || 'No category available',
+            image: place.photos ? `https://fastly.4sqi.net/img/general/300x300${place.photos[0].suffix}` : ''
+        }));
+        res.json(attractions);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching attractions data');
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
